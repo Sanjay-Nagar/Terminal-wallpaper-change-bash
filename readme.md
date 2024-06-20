@@ -18,7 +18,7 @@ Follow these steps to clone the repository, move the script to the appropriate d
 1. **Clone the repository:**
 
     ```sh
-      git clone https://github.com/Sanjay-Nagar/Terminal-wallpaper-change-bash.git
+    git clone https://github.com/Sanjay-Nagar/Terminal-wallpaper-change-bash.git
     ```
 
 2. **Navigate to the repository:**
