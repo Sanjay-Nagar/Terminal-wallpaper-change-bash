@@ -1,0 +1,18 @@
+#!/bin/bash
+# Path to the settings.json file
+SETTINGS_JSON_PATH="/mnt/c/Users/sit204.SIT/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
+# Path to the wallpaers folder
+WALLPAERS_FOLDER="/mnt/c/Users/sit204.SIT/Downloads/cmd"
+# Select a random wallpaper from the folder
+RANDOM_WALLPAER=$(ls "$WALLPAERS_FOLDER" | shuf -n 1)
+# Full path to the selected wallpaper
+FULL_PATH_TO_WALLPAER="$WALLPAERS_FOLDER/$RANDOM_WALLPAER"
+# Convert Windows path to Unix-style path for JSON
+UNIX_PATH_TO_WALLPAER=$(echo "$FULL_PATH_TO_WALLPAER" | sed 's/\\/\//g' |  sed 's|/mnt/c/|C:/|')
+VAR_MODIFIED=$(echo "$UNIX_PATH_TO_WALLPAER" | sed "s|C:/Users/sit204.SIT/Downloads/cmd/|$HOME/wall/|")
+echo "Wall :- $VAR_MODIFIED"
+cp $FULL_PATH_TO_WALLPAER  $HOME/wall/
+wal -c
+wal -i $VAR_MODIFIED &
+# Use jq to update the settings.json file
+jq --arg path "$UNIX_PATH_TO_WALLPAER" '.profiles.defaults.backgroundImage = $path' "$SETTINGS_JSON_PATH" > temp.json && mv temp.json "$SETTINGS_JSON_PATH"
